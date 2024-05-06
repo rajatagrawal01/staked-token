@@ -1,0 +1,813 @@
+{
+  "contractName": "RevertMsgExtractor",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/yields-utils-v2/utils/RevertMsgExtractor.sol\":\"RevertMsgExtractor\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/yields-utils-v2/utils/RevertMsgExtractor.sol\":{\"keccak256\":\"0x1ffc26637923ce8b2f31f5f73bd14ca7a936e427c7ba46637f8423a01b8894cf\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7bf520d4ce838a1a6bdd9b97be617bd64b042457265ffa2accfb1f7aa18bdf0d\",\"dweb:/ipfs/QmbVCVusuJkwoMi7VSgY2PaVC1f9L3K487dooQPHv8MjGN\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212207ae6116c2d856d4900e867e9c9bbf1d4e6711610c711892fa19fd45892b5106e64736f6c63430008000033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212207ae6116c2d856d4900e867e9c9bbf1d4e6711610c711892fa19fd45892b5106e64736f6c63430008000033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "194:723:38:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "194:723:38:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\n// Taken from https://github.com/sushiswap/BoringSolidity/blob/441e51c0544cf2451e6116fe00515e71d7c42e2c/contracts/BoringBatchable.sol\n\npragma solidity >=0.6.0;\n\n\nlibrary RevertMsgExtractor {\n    /// @dev Helper function to extract a useful revert message from a failed call.\n    /// If the returned data is malformed or not correctly abi encoded then this call can fail itself.\n    function getRevertMsg(bytes memory returnData)\n        internal pure\n        returns (string memory)\n    {\n        // If the _res length is less than 68, then the transaction failed silently (without a revert message)\n        if (returnData.length < 68) return \"Transaction reverted silently\";\n\n        assembly {\n            // Slice the sighash.\n            returnData := add(returnData, 0x04)\n        }\n        return abi.decode(returnData, (string)); // All that remains is the revert string\n    }\n}",
+  "sourcePath": "/home/vladimirdjukic/Documents/staked/tokens/contracts/yields-utils-v2/utils/RevertMsgExtractor.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/yields-utils-v2/utils/RevertMsgExtractor.sol",
+    "exportedSymbols": {
+      "RevertMsgExtractor": [
+        4085
+      ]
+    },
+    "id": 4086,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4059,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "167:24:38"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 4085,
+        "linearizedBaseContracts": [
+          4085
+        ],
+        "name": "RevertMsgExtractor",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4083,
+              "nodeType": "Block",
+              "src": "519:396:38",
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 4070,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 4067,
+                        "name": "returnData",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4062,
+                        "src": "644:10:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      "id": 4068,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "src": "644:17:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "hexValue": "3638",
+                      "id": 4069,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "664:2:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_68_by_1",
+                        "typeString": "int_const 68"
+                      },
+                      "value": "68"
+                    },
+                    "src": "644:22:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 4073,
+                  "nodeType": "IfStatement",
+                  "src": "640:66:38",
+                  "trueBody": {
+                    "expression": {
+                      "hexValue": "5472616e73616374696f6e2072657665727465642073696c656e746c79",
+                      "id": 4071,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "675:31:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_d0b1e7612ebe87924453e5d4581b9067879655587bae8a2dfee438433699b890",
+                        "typeString": "literal_string \"Transaction reverted silently\""
+                      },
+                      "value": "Transaction reverted silently"
+                    },
+                    "functionReturnParameters": 4066,
+                    "id": 4072,
+                    "nodeType": "Return",
+                    "src": "668:38:38"
+                  }
+                },
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "726:93:38",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "774:35:38",
+                        "value": {
+                          "arguments": [
+                            {
+                              "name": "returnData",
+                              "nodeType": "YulIdentifier",
+                              "src": "792:10:38"
+                            },
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "804:4:38",
+                              "type": "",
+                              "value": "0x04"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "add",
+                            "nodeType": "YulIdentifier",
+                            "src": "788:3:38"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "788:21:38"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "returnData",
+                            "nodeType": "YulIdentifier",
+                            "src": "774:10:38"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "istanbul",
+                  "externalReferences": [
+                    {
+                      "declaration": 4062,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "774:10:38",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 4062,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "792:10:38",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 4074,
+                  "nodeType": "InlineAssembly",
+                  "src": "717:102:38"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4077,
+                        "name": "returnData",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4062,
+                        "src": "846:10:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "components": [
+                          {
+                            "id": 4079,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "859:6:38",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                              "typeString": "type(string storage pointer)"
+                            },
+                            "typeName": {
+                              "id": 4078,
+                              "name": "string",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "859:6:38",
+                              "typeDescriptions": {}
+                            }
+                          }
+                        ],
+                        "id": 4080,
+                        "isConstant": false,
+                        "isInlineArray": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "TupleExpression",
+                        "src": "858:8:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                          "typeString": "type(string storage pointer)"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                          "typeString": "type(string storage pointer)"
+                        }
+                      ],
+                      "expression": {
+                        "id": 4075,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4294967295,
+                        "src": "835:3:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 4076,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "decode",
+                      "nodeType": "MemberAccess",
+                      "src": "835:10:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                        "typeString": "function () pure"
+                      }
+                    },
+                    "id": 4081,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "835:32:38",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string memory"
+                    }
+                  },
+                  "functionReturnParameters": 4066,
+                  "id": 4082,
+                  "nodeType": "Return",
+                  "src": "828:39:38"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4060,
+              "nodeType": "StructuredDocumentation",
+              "src": "227:182:38",
+              "text": "@dev Helper function to extract a useful revert message from a failed call.\n If the returned data is malformed or not correctly abi encoded then this call can fail itself."
+            },
+            "id": 4084,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRevertMsg",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4063,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4062,
+                  "mutability": "mutable",
+                  "name": "returnData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4084,
+                  "src": "436:23:38",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 4061,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "436:5:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "435:25:38"
+            },
+            "returnParameters": {
+              "id": 4066,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4065,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4084,
+                  "src": "500:13:38",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 4064,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "500:6:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "499:15:38"
+            },
+            "scope": 4085,
+            "src": "414:501:38",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 4086,
+        "src": "194:723:38"
+      }
+    ],
+    "src": "167:750:38"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/yields-utils-v2/utils/RevertMsgExtractor.sol",
+    "exportedSymbols": {
+      "RevertMsgExtractor": [
+        4085
+      ]
+    },
+    "id": 4086,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4059,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "167:24:38"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 4085,
+        "linearizedBaseContracts": [
+          4085
+        ],
+        "name": "RevertMsgExtractor",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4083,
+              "nodeType": "Block",
+              "src": "519:396:38",
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 4070,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 4067,
+                        "name": "returnData",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4062,
+                        "src": "644:10:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      "id": 4068,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "src": "644:17:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "hexValue": "3638",
+                      "id": 4069,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "664:2:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_68_by_1",
+                        "typeString": "int_const 68"
+                      },
+                      "value": "68"
+                    },
+                    "src": "644:22:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 4073,
+                  "nodeType": "IfStatement",
+                  "src": "640:66:38",
+                  "trueBody": {
+                    "expression": {
+                      "hexValue": "5472616e73616374696f6e2072657665727465642073696c656e746c79",
+                      "id": 4071,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "675:31:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_d0b1e7612ebe87924453e5d4581b9067879655587bae8a2dfee438433699b890",
+                        "typeString": "literal_string \"Transaction reverted silently\""
+                      },
+                      "value": "Transaction reverted silently"
+                    },
+                    "functionReturnParameters": 4066,
+                    "id": 4072,
+                    "nodeType": "Return",
+                    "src": "668:38:38"
+                  }
+                },
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "726:93:38",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "774:35:38",
+                        "value": {
+                          "arguments": [
+                            {
+                              "name": "returnData",
+                              "nodeType": "YulIdentifier",
+                              "src": "792:10:38"
+                            },
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "804:4:38",
+                              "type": "",
+                              "value": "0x04"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "add",
+                            "nodeType": "YulIdentifier",
+                            "src": "788:3:38"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "788:21:38"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "returnData",
+                            "nodeType": "YulIdentifier",
+                            "src": "774:10:38"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "istanbul",
+                  "externalReferences": [
+                    {
+                      "declaration": 4062,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "774:10:38",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 4062,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "792:10:38",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 4074,
+                  "nodeType": "InlineAssembly",
+                  "src": "717:102:38"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4077,
+                        "name": "returnData",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4062,
+                        "src": "846:10:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "components": [
+                          {
+                            "id": 4079,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "859:6:38",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                              "typeString": "type(string storage pointer)"
+                            },
+                            "typeName": {
+                              "id": 4078,
+                              "name": "string",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "859:6:38",
+                              "typeDescriptions": {}
+                            }
+                          }
+                        ],
+                        "id": 4080,
+                        "isConstant": false,
+                        "isInlineArray": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "TupleExpression",
+                        "src": "858:8:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                          "typeString": "type(string storage pointer)"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                          "typeString": "type(string storage pointer)"
+                        }
+                      ],
+                      "expression": {
+                        "id": 4075,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4294967295,
+                        "src": "835:3:38",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 4076,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "decode",
+                      "nodeType": "MemberAccess",
+                      "src": "835:10:38",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                        "typeString": "function () pure"
+                      }
+                    },
+                    "id": 4081,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "835:32:38",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string memory"
+                    }
+                  },
+                  "functionReturnParameters": 4066,
+                  "id": 4082,
+                  "nodeType": "Return",
+                  "src": "828:39:38"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4060,
+              "nodeType": "StructuredDocumentation",
+              "src": "227:182:38",
+              "text": "@dev Helper function to extract a useful revert message from a failed call.\n If the returned data is malformed or not correctly abi encoded then this call can fail itself."
+            },
+            "id": 4084,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRevertMsg",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4063,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4062,
+                  "mutability": "mutable",
+                  "name": "returnData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4084,
+                  "src": "436:23:38",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 4061,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "436:5:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "435:25:38"
+            },
+            "returnParameters": {
+              "id": 4066,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4065,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4084,
+                  "src": "500:13:38",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 4064,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "500:6:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "499:15:38"
+            },
+            "scope": 4085,
+            "src": "414:501:38",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 4086,
+        "src": "194:723:38"
+      }
+    ],
+    "src": "167:750:38"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-08-29T11:51:09.078Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
